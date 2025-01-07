@@ -15,7 +15,7 @@ Temp::Temp(std::mutex &mutex, MODBUS::Modbus &modbus, json &temp_conf)
 
   name = conf.value("name", "temp");
   addr = conf.value("addr", 1);
-  value_reg = conf.value("value_addr", 0);
+  value_reg = conf.value("value_reg", 0);
   loop = conf.value("interval", 5000);
   offset_a = conf.value("offset_a", 1.0f);
   offset_b = conf.value("offset_b", 0.0f);
