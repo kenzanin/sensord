@@ -27,7 +27,7 @@ protected:
   bool calib_first_sequence = false;
   int loop = 5000;
   int addr;
-  int value_addr;
+  int value_reg;
   int slope_boqu;
   float value = 0.0f;
   float offset_a = 1.0f;

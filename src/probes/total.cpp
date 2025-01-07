@@ -11,7 +11,7 @@ Total::Total(std::mutex &mutex, MODBUS::Modbus &modbus, json &ph_conf)
 
   name = conf.value("name", "total");
   addr = conf.value("addr", 1);
-  value_addr = conf.value("value_addr", 0);
+  value_reg = conf.value("value_reg", 0);
   loop = conf.value("interval", 5000);
 
   logi("{} probe, addr: {}", name, addr);

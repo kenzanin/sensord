@@ -15,7 +15,7 @@ Temp::Temp(std::mutex &mutex, MODBUS::Modbus &modbus, json &temp_conf)
 
   name = conf.value("name", "temp");
   addr = conf.value("addr", 1);
-  value_addr = conf.value("value_addr", 0);
+  value_reg = conf.value("value_addr", 0);
   loop = conf.value("interval", 5000);
   offset_a = conf.value("offset_a", 1.0f);
   offset_b = conf.value("offset_b", 0.0f);
@@ -50,7 +50,7 @@ void Temp::update_value_kacise() {
     return;
   }
   logi("reading {}, reg: {}", name, addr);
-  auto v = modbus.get_value_float_cdab(value_addr);
+  auto v = modbus.get_value_float_cdab(value_reg);
   if (!v.has_value()) {
     logi("error reading {}, reg: {}", name, addr);
     sleep(start, loop);
@@ -87,7 +87,7 @@ void Temp::update_value_boqu() {
   }
   logi("reading {}, reg: {}", name, addr);
 
-  auto v = modbus.get_value_int16_ab(value_addr);
+  auto v = modbus.get_value_int16_ab(value_reg);
 
   if (!v.has_value()) {
     logi("error reading {}, reg: {}", name, addr);
