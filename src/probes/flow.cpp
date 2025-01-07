@@ -16,6 +16,7 @@ Flow::Flow(std::mutex &mutex, MODBUS::Modbus &modbus, json &ph_conf)
   offset_b = conf.value("offset_b", 0.0f);
   value_min = conf.value("value_min", 4.0f);
   value_max = conf.value("value_max", 9.0f);
+  enable = conf.value("enable",true);
 
   logi("{} probe, addr: {}", name, addr);
   fmtlog::poll();

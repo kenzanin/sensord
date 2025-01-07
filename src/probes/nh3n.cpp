@@ -14,6 +14,7 @@ Nh3n::Nh3n(std::mutex &mutex, MODBUS::Modbus &modbus, nlohmann::json &nh3n_conf)
   value_min = conf.value("value_min", 0.015f);
   value_max = conf.value("value_max", 1.0f);
   random_fact = conf.value("random_fact", 0.015f);
+  enable = conf.value("enable",true);
 
   logi("{} probe, addr: {}", name, addr);
 

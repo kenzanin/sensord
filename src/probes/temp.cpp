@@ -21,6 +21,7 @@ Temp::Temp(std::mutex &mutex, MODBUS::Modbus &modbus, json &temp_conf)
   offset_b = conf.value("offset_b", 0.0f);
   value_min = conf.value("value_min", 20.0f);
   value_max = conf.value("value_max", 50.0f);
+  enable = conf.value("enable",true);
 
   logi("{} probe, addr: {}", name, addr);
 

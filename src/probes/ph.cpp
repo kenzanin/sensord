@@ -23,6 +23,7 @@ Ph::Ph(std::mutex &mutex, MODBUS::Modbus &modbus, json &ph_conf)
   value_min = conf.value("value_min", 4.0f);
   value_max = conf.value("value_max", 9.0f);
   random_fact = conf.value("random_fact", 0.5f);
+  enable = conf.value("enable",true);
 
   logi("{} probe, addr: {}", name, addr);
 

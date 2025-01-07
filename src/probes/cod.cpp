@@ -23,6 +23,7 @@ Cod::Cod(std::mutex &mutex, MODBUS::Modbus &modbus, json &cod_conf)
   value_min = conf.value("value_min", 0.5f);
   value_max = conf.value("value_max", 100.0f);
   random_fact = conf.value("random_fact", 0.5f);
+  enable = conf.value("enable",true);
 
   logi("{} probe, addr: {}", name, addr);
 

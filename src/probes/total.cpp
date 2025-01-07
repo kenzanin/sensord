@@ -13,6 +13,7 @@ Total::Total(std::mutex &mutex, MODBUS::Modbus &modbus, json &ph_conf)
   addr = conf.value("addr", 1);
   value_reg = conf.value("value_reg", 0);
   loop = conf.value("interval", 5000);
+  enable = conf.value("enable",true);
 
   logi("{} probe, addr: {}", name, addr);
   fmtlog::poll();
