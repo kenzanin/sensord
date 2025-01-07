@@ -58,7 +58,7 @@ void Ph::update_value_kacise() {
     sleep(start, loop);
     return;
   }
-  auto val = modbus.dcba_to_float(v,0);
+  auto val = modbus.dcba_to_float(v,2);
   logi("success reading {}, addr: {}, reg: {}, value: {}", name, addr, value_reg, val);
   {
     const std::lock_guard<std::mutex> lock(mutex);
