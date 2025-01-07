@@ -8,7 +8,8 @@
     "random_fact": 0.5,
     "value_max": 150.0,
     "value_min": 0.5,
-    "value_reg": 0
+    "value_reg": 0,
+    "enable": false
   },
   "dbase": {
     "dbase_url": "dbname=sparingdb user=postgres password=123 hostaddr=127.0.0.1 port=5432",
@@ -18,12 +19,13 @@
     "addr": 6,
     "interval": 5000,
     "name": "flow",
-    "value_reg": 0
+    "value_reg": 0,
+    "enable": false
   },
   "modbus": {
     "baud": 9600,
     "data_bit": 8,
-    "device": "/dev/tnt1",
+    "device": "/dev/ttyUSB0",
     "parity": "N",
     "stop_bit": 1,
     "debug": 1
@@ -37,7 +39,8 @@
     "random_fact": 0.015,
     "value_max": 1.0,
     "value_min": 0.015,
-    "value_reg": 0
+    "value_reg": 0,
+    "enable": false
   },
   "ph": {
     "addr": 2,
@@ -62,13 +65,15 @@
     "offset_b": 0.0,
     "value_max": 50,
     "value_min": 0,
-    "value_reg": 1
+    "value_reg": 1,
+    "enable": false
   },
   "total": {
     "addr": 6,
     "interval": 5000,
     "name": "total",
-    "value_reg": 0
+    "value_reg": 0,
+    "enable": false
   },
   "tss": {
     "addr": 3,
@@ -79,6 +84,7 @@
     "random_fact": 0.5,
     "value_max": 100.0,
     "value_min": 0.5,
-    "value_reg": 0
+    "value_reg": 0,
+    "enable": false
   }
 }
