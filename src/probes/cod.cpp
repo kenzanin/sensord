@@ -61,7 +61,7 @@ void Cod::update_value_kacise() {
     return;
   }
 
-  auto val = modbus.cdba_to_float(v, 2);
+  auto val = modbus.cdba_to_float(v, 0);
 
   logi("success reading {}, addr: {}, reg: {}, value: {}", name, addr,
        value_reg, val);
