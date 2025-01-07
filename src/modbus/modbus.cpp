@@ -1,3 +1,6 @@
+#include "fmtlog/fmtlog.h"  // IWYU pragma: keep
+#include "modbus/modbus.h"
+
 #include "bit"
 #include "chrono"
 #include "config/config.hpp"  // IWYU pragma: keep
@@ -5,15 +8,12 @@
 #include "cstring"
 #include "fmt/core.h"
 #include "fmt/ranges.h"     // IWYU pragma: keep
-#include "fmtlog/fmtlog.h"  // IWYU pragma: keep
-#include "modbus/modbus.h"
+#include "modbus.hpp"
 #include "mutex"
 #include "optional"
 #include "string"
 #include "thread"
 #include "vector"
-
-#include "modbus.hpp"
 
 namespace MODBUS {
 
@@ -217,6 +217,22 @@ int Modbus::set_data_float_dcba(int addr, float data) {
   auto buf = std::vector<uint16_t>(2, 0);
   modbus_set_float_dcba(data, buf.data());
   return set_data(addr, buf);
+}
+
+float Modbus::abcd_to_float(const std::vector<uint16_t> &in, int index = 0) {
+  return modbus_get_float_abcd(in.data() + index);
+}
+
+float Modbus::badc_to_float(const std::vector<uint16_t> &in, int index = 0) {
+  return modbus_get_float_badc(in.data() + index);
+}
+
+float Modbus::cdba_to_float(const std::vector<uint16_t> &in, int index = 0) {
+  return modbus_get_float_cdab(in.data() + index);
+}
+
+float Modbus::dcba_to_float(const std::vector<uint16_t> &in, int index = 0) {
+  return modbus_get_float_dcba(in.data() + index);
 }
 
 Modbus::~Modbus() {

@@ -1,9 +1,9 @@
-#include "fmtlog/fmtlog.h" // IWYU pragma: keep
+#include "fmtlog/fmtlog.h"  // IWYU pragma: keep
+#include "ph.hpp"
 
 #include "cstdlib"
 #include "mutex"
 #include "optional"
-#include "ph.hpp"
 #include "vector"
 
 namespace PROBES {
@@ -13,7 +13,6 @@ using namespace std::literals;
 
 Ph::Ph(std::mutex &mutex, MODBUS::Modbus &modbus, json &ph_conf)
     : modbus(modbus), conf(ph_conf), mutex(mutex) {
-
   name = conf.value("name", "ph");
   addr = conf.value("addr", 1);
   value_reg = conf.value("value_reg", 0);
@@ -23,7 +22,7 @@ Ph::Ph(std::mutex &mutex, MODBUS::Modbus &modbus, json &ph_conf)
   value_min = conf.value("value_min", 4.0f);
   value_max = conf.value("value_max", 9.0f);
   random_fact = conf.value("random_fact", 0.5f);
-  enable = conf.value("enable",true);
+  enable = conf.value("enable", true);
 
   logi("{} probe, addr: {}", name, addr);
 
@@ -52,17 +51,18 @@ void Ph::update_value_kacise() {
     sleep(start, loop);
     return;
   }
-  logi("reading {}, reg: {}", name, addr);
-  auto v = modbus.get_value_float_cdab(value_reg);
-  if (!v.has_value()) {
-    logi("error reading {}, reg: {}", name, addr);
+  logi("reading {}, addr: {}, reg: {}", name, addr, value_reg);
+  auto v = modbus.get_data(value_reg, 3 * 2);
+  if (!v.size()) {
+    logi("error reading {}, addr: {}, reg: {}", name, addr, value_reg);
     sleep(start, loop);
     return;
   }
-  logi("success reading {}, reg: {}, value: {}", name, addr, v.value());
+  auto val = modbus.dcba_to_float(v,0);
+  logi("success reading {}, addr: {}, reg: {}, value: {}", name, addr, value_reg, val);
   {
     const std::lock_guard<std::mutex> lock(mutex);
-    value = v.value();
+    value = val;
   }
   sleep(start, loop);
 }
@@ -170,8 +170,7 @@ int Ph::set_offset(float a, float b) {
 }
 
 void Ph::impl_set_calib_boqu_first_sequence() {
-  if (!calib_first_sequence)
-    return;
+  if (!calib_first_sequence) return;
 
   modbus.set_slave(addr);
   // Standard Solution
@@ -188,8 +187,7 @@ void Ph::impl_set_calib_boqu_first_sequence() {
 }
 
 void Ph::update_calib_slope_boqu() {
-  if (calib == false)
-    return;
+  if (calib == false) return;
   impl_set_calib_boqu_first_sequence();
   auto v = std::optional<int>{0};
   v = modbus.get_value_int16_ab(15);
@@ -217,4 +215,4 @@ void Ph::set_calib_boqu(bool en) {
 bool Ph::get_calib_boqu() { return calib; }
 
 std::vector<float> Ph::get_offset() { return {offset_a, offset_b}; }
-} // namespace PROBES
+}  // namespace PROBES
