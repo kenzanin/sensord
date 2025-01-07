@@ -1,15 +1,15 @@
 {
   "cod": {
     "addr": 3,
-    "interval": 5000,
+    "interval": 1000,
     "name": "cod",
     "offset_a": 0.0,
     "offset_b": 1.0,
     "random_fact": 0.5,
     "value_max": 150.0,
     "value_min": 0.5,
-    "value_reg": 0,
-    "enable": false
+    "value_reg": 9728,
+    "enable": true
   },
   "dbase": {
     "dbase_url": "dbname=sparingdb user=postgres password=123 hostaddr=127.0.0.1 port=5432",
@@ -17,7 +17,7 @@
   },
   "flow": {
     "addr": 6,
-    "interval": 5000,
+    "interval": 1000,
     "name": "flow",
     "value_reg": 0,
     "enable": false
