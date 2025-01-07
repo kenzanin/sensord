@@ -23,7 +23,7 @@ Cod::Cod(std::mutex &mutex, MODBUS::Modbus &modbus, json &cod_conf)
   value_min = conf.value("value_min", 0.5f);
   value_max = conf.value("value_max", 100.0f);
   random_fact = conf.value("random_fact", 0.5f);
-  enable = conf.value("enable",true);
+  enable = conf.value("enable", true);
 
   logi("{} probe, addr: {}", name, addr);
 
@@ -47,22 +47,27 @@ void Cod::update_value_kacise() {
 
   auto start = std::chrono::high_resolution_clock::now();
   if (!enable) {
-    logi("{}, reg: {}, disabled", name, addr);
+    logi("{}, addr: {}, reg: {}, disabled", name, addr, value_reg);
     fmtlog::poll();
     sleep(start, loop);
     return;
   }
-  logi("reading {}, reg: {}", name, addr);
-  auto v = modbus.get_value_float_cdab(value_reg);
-  if (!v.has_value()) {
-    logi("error reading {}, reg: {}", name, addr);
+  logi("reading {}, addr: {}, reg: {}", name, addr, value_reg);
+  // auto v = modbus.get_value_float_cdab(value_reg);
+  auto v = modbus.get_data(value_reg, 6 * 2);
+  if (!v.size()) {
+    logi("error reading {}, addr: {}, reg: {}", name, addr, value_reg);
     sleep(start, loop);
     return;
   }
-  logi("success reading {}, reg: {}, value: {}", name, addr, v.value());
+
+  auto val = modbus.cdba_to_float(v, 2);
+
+  logi("success reading {}, addr: {}, reg: {}, value: {}", name, addr,
+       value_reg, val);
   {
     const std::lock_guard<std::mutex> lock(mutex);
-    value = v.value();
+    value = val;
   }
   sleep(start, loop);
 }
