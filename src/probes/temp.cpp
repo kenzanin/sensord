@@ -51,7 +51,7 @@ void Temp::update_value_kacise() {
     return;
   }
   logi("reading {}, addr: {}, reg: {}", name, addr, value_reg);
-  auto v = modbus.get_value_float_cdab(value_reg);
+  auto v = modbus.get_value_float_dcba(value_reg);
   if (!v.has_value()) {
     logi("error reading {}, addr: {}, reg: {}", name, addr, value_reg);
     sleep(start, loop);
