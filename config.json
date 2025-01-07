@@ -51,7 +51,7 @@
     "random_fact": 0.5,
     "value_max": 9.0,
     "value_min": 4.0,
-    "value_reg": 0
+    "value_reg": 9728
   },
   "server": {
     "path": "templates/",
