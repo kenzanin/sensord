@@ -1,0 +1,9 @@
+<p>Sedia: </p>
+<ol>
+  <li><a href="/ph">PH Sensor</a></li>
+  <li><a href="/cod">COD Sensor</a></li>
+  <li><a href="/tss">TSS Sensor</a></li>
+  <li><a href="/nh3n">NH3N Sensor</a></li>
+  <li><a href="/temp">Temp Sensor</a></li>
+  <li><a href="/config">Config</a></li>
+</ol>

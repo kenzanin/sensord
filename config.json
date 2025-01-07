@@ -1,0 +1,83 @@
+{
+  "cod": {
+    "addr": 2,
+    "interval": 5000,
+    "name": "cod",
+    "offset_a": 1.0,
+    "offset_b": 0.0,
+    "random_fact": 0.5,
+    "value_max": 150.0,
+    "value_min": 0.5,
+    "value_reg": 0
+  },
+  "dbase": {
+    "dbase_url": "dbname=sparingdb user=postgres password=123 hostaddr=127.0.0.1 port=5432",
+    "interval": 120
+  },
+  "flow": {
+    "addr": 3,
+    "interval": 5000,
+    "name": "flow",
+    "value_reg": 0
+  },
+  "modbus": {
+    "baud": 9600,
+    "data_bit": 8,
+    "device": "/dev/tnt1",
+    "parity": "N",
+    "stop_bit": 1
+  },
+  "nh3n": {
+    "addr": 3,
+    "interval": 5000,
+    "name": "nh3n",
+    "offset_a": 1.0,
+    "offset_b": 0.0,
+    "random_fact": 0.015,
+    "value_max": 1.0,
+    "value_min": 0.015,
+    "value_reg": 0
+  },
+  "ph": {
+    "addr": 1,
+    "interval": 5000,
+    "name": "ph",
+    "offset_a": 1.0,
+    "offset_b": 0.0,
+    "random_fact": 0.5,
+    "value_max": 9.0,
+    "value_min": 4.0,
+    "value_reg": 0
+  },
+  "server": {
+    "path": "templates/",
+    "port": 8080
+  },
+  "temp": {
+    "addr": 2,
+    "interval": 5000,
+    "name": "temp",
+    "offset_a": 1.0,
+    "offset_b": 0.0,
+    "value_max": 50,
+    "value_min": 0,
+    "value_reg": 1
+  },
+  "total": {
+    "addr": 3,
+    "interval": 5000,
+    "name": "total",
+    "value_reg": 0
+  },
+  "tss": {
+    "addr": 3,
+    "interval": 5000,
+    "name": "tss",
+    "offset_a": 1.0,
+    "offset_b": 0.0,
+    "random_fact": 0.5,
+    "value_max": 100.0,
+    "value_min": 0.5,
+    "value_reg": 0
+  }
+}
