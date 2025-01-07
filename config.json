@@ -82,7 +82,7 @@
     "random_fact": 0.5,
     "value_max": 100.0,
     "value_min": 0.5,
-    "value_reg": 0,
-    "enable": false
+    "value_reg": 9728,
+    "enable": true
   }
 }
