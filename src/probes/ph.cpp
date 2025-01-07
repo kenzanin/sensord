@@ -52,7 +52,7 @@ void Ph::update_value_kacise() {
     return;
   }
   logi("reading {}, addr: {}, reg: {}", name, addr, value_reg);
-  auto v = modbus.get_data(value_reg, 3 * 2);
+  auto v = modbus.get_data(value_reg, 6 * 2);
   if (!v.size()) {
     logi("error reading {}, addr: {}, reg: {}", name, addr, value_reg);
     sleep(start, loop);
