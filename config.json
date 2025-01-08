@@ -1,7 +1,7 @@
 {
   "cod": {
     "addr": 3,
-    "interval": 1000,
+    "interval": 2000,
     "name": "cod",
     "offset_a": 0.0,
     "offset_b": 1.0,
@@ -17,10 +17,10 @@
   },
   "flow": {
     "addr": 6,
-    "interval": 1000,
+    "interval": 2000,
     "name": "flow",
     "value_reg": 0,
-    "enable": false
+    "enable": true
   },
   "modbus": {
     "baud": 9600,
@@ -32,7 +32,7 @@
   },
   "nh3n": {
     "addr": 5,
-    "interval": 1000,
+    "interval": 2000,
     "name": "nh3n",
     "offset_a": 0.0,
     "offset_b": 1.0,
@@ -44,13 +44,13 @@
   },
   "ph": {
     "addr": 2,
-    "interval": 1000,
+    "interval": 2000,
     "name": "ph",
     "offset_a": 0.0,
     "offset_b": 1.0,
     "random_fact": 0.5,
     "value_max": 9.0,
-    "value_min": 4.0,
+    "value_min": 6.0,
     "value_reg": 9728
   },
   "server": {
@@ -59,7 +59,7 @@
   },
   "temp": {
     "addr": 2,
-    "interval": 1000,
+    "interval": 2000,
     "name": "temp",
     "value_max": 50,
     "value_min": 0,
@@ -68,19 +68,19 @@
   },
   "total": {
     "addr": 6,
-    "interval": 1000,
+    "interval": 2000,
     "name": "total",
     "value_reg": 0,
     "enable": false
   },
   "tss": {
     "addr": 4,
-    "interval": 1000,
+    "interval": 2000,
     "name": "tss",
     "offset_a": 0.0,
     "offset_b": 1.0,
     "random_fact": 0.5,
-    "value_max": 100.0,
+    "value_max": 50.0,
     "value_min": 0.5,
     "value_reg": 9728,
     "enable": true
