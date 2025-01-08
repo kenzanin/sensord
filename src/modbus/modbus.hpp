@@ -51,6 +51,8 @@ protected:
   int stop_bit;
   int debug;
   int retry_delay;
+  int response_timeout;
+  int byte_timeout;
 };
 
 } // namespace MODBUS

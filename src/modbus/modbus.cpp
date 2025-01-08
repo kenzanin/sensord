@@ -1,4 +1,3 @@
-#include "modbus/modbus.h"
 #include "fmtlog/fmtlog.h" // IWYU pragma: keep
 
 #include "bit"
@@ -14,6 +13,8 @@
 #include "string"
 #include "thread"
 #include "vector"
+
+#include "modbus/modbus.h" // IWYU pragma: keep
 
 namespace MODBUS {
 
@@ -54,13 +55,16 @@ Modbus::Modbus(std::mutex &mutex, json &modbus_conf)
   stop_bit = conf->value("stop_bit", 1);
   debug = conf->value("debug", 0);
   retry_delay = conf->value("retry_delay", 1000);
+  response_timeout = conf->value("response_timeout", 1000) * 1000;
+  byte_timeout = conf->value("byte_timeout", 250) * 1000;
 
   ctx = modbus_new_rtu(device.c_str(), baud, parity, data_bit, stop_bit);
 
   if (debug)
     modbus_set_debug(ctx, 1);
-  modbus_set_response_timeout(ctx, 0, 1000 * 1000);
-  modbus_set_byte_timeout(ctx, 0, 500 * 1000);
+  modbus_set_response_timeout(ctx, 0, response_timeout);
+  modbus_set_byte_timeout(ctx, 0, byte_timeout);
+  modbus_set_error_recovery(ctx, MODBUS_ERROR_RECOVERY_PROTOCOL);
 
   while (1) {
     auto err = modbus_connect(ctx);
