@@ -13,7 +13,7 @@ Total::Total(std::mutex &mutex, MODBUS::Modbus &modbus, json &ph_conf)
   addr = conf.value("addr", 1);
   value_reg = conf.value("value_reg", 0);
   loop = conf.value("interval", 5000);
-  enable = conf.value("enable",true);
+  enable = conf.value("enable", true);
 
   logi("{} probe, addr: {}", name, addr);
   fmtlog::poll();
@@ -48,23 +48,24 @@ void Total::update_value_kacise() {
 
   auto start = std::chrono::high_resolution_clock::now();
   if (!enable) {
-    logi("{}, reg: {}, disabled", name, addr);
+    logi("{}, addr: {}, reg: {}, disabled", name, addr, value_reg);
     fmtlog::poll();
     sleep(start, loop);
     return;
   }
-  logi("reading {}, reg: {}", name, addr);
+  logi("reading {}, addr: {}, reg: {}", name, addr, value_reg);
 
   auto v = modbus.get_data(addr, 2);
   if (!v.size()) {
-    logi("error reading {}, reg: {}", name, addr);
+    logi("error reading {}, addr: {}, reg: {}", name, addr, value_reg);
     sleep(start, loop);
     return;
   }
 
   uint32_t v_value = v[1] | (v[0] << 16);
 
-  logi("success reading {}, reg: {}, value: {}", name, addr, v_value);
+  logi("success reading {}, addr: {}, reg: {}, value: {}", name, addr,
+       value_reg, v_value);
   {
     const std::lock_guard<std::mutex> lock(mutex);
     total = v_value;
