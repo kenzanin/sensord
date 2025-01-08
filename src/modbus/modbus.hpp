@@ -2,18 +2,18 @@
 
 #include <cstdint>
 
-#include "config/config.hpp"  // IWYU pragma: keep
+#include "config/config.hpp" // IWYU pragma: keep
 #include "cstdint"
 #include "modbus/modbus.h"
 #include "mutex"
-#include "nlohmann/json.hpp"  // IWYU pragma: keep
+#include "nlohmann/json.hpp" // IWYU pragma: keep
 #include "optional"
 #include "string"
 
 namespace MODBUS {
 
 class Modbus {
- public:
+public:
   Modbus(std::mutex &mutex, std::string const device = "/dev/tnt1",
          uint32_t baud = 9600, char parity = 'N', uint8_t data_bit = 8,
          uint8_t stop_bit = 1);
@@ -40,10 +40,17 @@ class Modbus {
   std::optional<int> get_value_int16_ab(int addr);
   std::optional<int> get_value_int16_ba(int addr);
 
- protected:
+protected:
   modbus_t *ctx;
   std::mutex &mutex;
   nlohmann::json *conf;
+  std::string device{};
+  int baud;
+  char parity;
+  int data_bit;
+  int stop_bit;
+  int debug;
+  int retry_delay;
 };
 
-}  // namespace MODBUS
+} // namespace MODBUS

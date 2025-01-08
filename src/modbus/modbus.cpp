@@ -1,13 +1,13 @@
-#include "fmtlog/fmtlog.h"  // IWYU pragma: keep
 #include "modbus/modbus.h"
+#include "fmtlog/fmtlog.h" // IWYU pragma: keep
 
 #include "bit"
 #include "chrono"
-#include "config/config.hpp"  // IWYU pragma: keep
+#include "config/config.hpp" // IWYU pragma: keep
 #include "cstdint"
 #include "cstring"
 #include "fmt/core.h"
-#include "fmt/ranges.h"     // IWYU pragma: keep
+#include "fmt/ranges.h" // IWYU pragma: keep
 #include "modbus.hpp"
 #include "mutex"
 #include "optional"
@@ -47,15 +47,18 @@ Modbus::Modbus(std::mutex &mutex, std::string const device, uint32_t baud,
 
 Modbus::Modbus(std::mutex &mutex, json &modbus_conf)
     : mutex(mutex), conf(&modbus_conf) {
-  const auto device = conf->value("device", "/dev/tnt1"s);
-  const auto baud = conf->value("baud", 9600);
-  const auto parity = conf->value("parity", "N")[0];
-  const auto data_bit = conf->value("data_bit", 8);
-  const auto stop_bit = conf->value("stop_bit", 1);
-  const auto debug = conf->value("debug", 0);
+  device = conf->value("device", "/dev/tnt1"s);
+  baud = conf->value("baud", 9600);
+  parity = conf->value("parity", "N")[0];
+  data_bit = conf->value("data_bit", 8);
+  stop_bit = conf->value("stop_bit", 1);
+  debug = conf->value("debug", 0);
+  retry_delay = conf->value("retry_delay", 1000);
+
   ctx = modbus_new_rtu(device.c_str(), baud, parity, data_bit, stop_bit);
 
-  if (debug) modbus_set_debug(ctx, 1);
+  if (debug)
+    modbus_set_debug(ctx, 1);
   modbus_set_response_timeout(ctx, 0, 1000 * 1000);
   modbus_set_byte_timeout(ctx, 0, 500 * 1000);
 
@@ -66,7 +69,7 @@ Modbus::Modbus(std::mutex &mutex, json &modbus_conf)
     }
     logi("cant connect to modbus: {}", modbus_strerror(errno));
     fmtlog::poll();
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(retry_delay));
   }
 }
 
@@ -82,7 +85,7 @@ std::vector<uint16_t> Modbus::get_data(int addr, int n) {
   {
     for (; retry < 10; retry++) {
       int err = 0;
-      {  // lock guard
+      { // lock guard
         const std::lock_guard<std::mutex> lock(mutex);
         err = modbus_read_registers(ctx, addr, dest.size(), dest.data());
       }
@@ -92,7 +95,7 @@ std::vector<uint16_t> Modbus::get_data(int addr, int n) {
       logi("modbus id: {}, read register: {} error: {}", modbus_get_slave(ctx),
            addr, modbus_strerror(errno));
       fmtlog::poll();
-      std::this_thread::sleep_for(std::chrono::milliseconds(200));
+      std::this_thread::sleep_for(std::chrono::milliseconds(retry_delay));
     }
   }
 
@@ -109,7 +112,7 @@ int Modbus::set_data(int addr, std::vector<uint16_t> &data) {
   int err = 0;
 
   for (; retry < 10; retry++) {
-    {  // lock guard
+    { // lock guard
       const std::lock_guard<std::mutex> lock(mutex);
       err = modbus_write_registers(ctx, addr, data.size(), data.data());
     }
@@ -119,7 +122,7 @@ int Modbus::set_data(int addr, std::vector<uint16_t> &data) {
     logi("modbus id: {}, write error: ", modbus_get_slave(ctx),
          modbus_strerror(errno));
     fmtlog::poll();
-    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    std::this_thread::sleep_for(std::chrono::milliseconds(retry_delay));
   }
 
   if (retry >= 10) {
@@ -240,4 +243,4 @@ Modbus::~Modbus() {
   modbus_free(ctx);
 }
 
-}  // namespace MODBUS
+} // namespace MODBUS
