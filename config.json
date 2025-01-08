@@ -39,8 +39,8 @@
     "random_fact": 0.015,
     "value_max": 1.0,
     "value_min": 0.015,
-    "value_reg": 0,
-    "enable": false
+    "value_reg": 9728,
+    "enable": true
   },
   "ph": {
     "addr": 2,
