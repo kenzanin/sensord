@@ -1,7 +1,7 @@
 {
   "cod": {
     "addr": 3,
-    "interval": 2000,
+    "interval": 1000,
     "name": "cod",
     "offset_a": 0.0,
     "offset_b": 1.0,
@@ -17,7 +17,7 @@
   },
   "flow": {
     "addr": 6,
-    "interval": 2000,
+    "interval": 1000,
     "name": "flow",
     "value_reg": 0,
     "enable": true
@@ -28,11 +28,12 @@
     "device": "/dev/ttyUSB0",
     "parity": "N",
     "stop_bit": 1,
-    "debug": 1
+    "debug": 0,
+    "retry_delay": 500
   },
   "nh3n": {
     "addr": 5,
-    "interval": 2000,
+    "interval": 1000,
     "name": "nh3n",
     "offset_a": 0.0,
     "offset_b": 1.0,
@@ -44,7 +45,7 @@
   },
   "ph": {
     "addr": 2,
-    "interval": 2000,
+    "interval": 1000,
     "name": "ph",
     "offset_a": 0.0,
     "offset_b": 1.0,
@@ -59,7 +60,7 @@
   },
   "temp": {
     "addr": 2,
-    "interval": 2000,
+    "interval": 1000,
     "name": "temp",
     "value_max": 50,
     "value_min": 0,
@@ -68,14 +69,14 @@
   },
   "total": {
     "addr": 6,
-    "interval": 2000,
+    "interval": 1000,
     "name": "total",
-    "value_reg": 0,
-    "enable": false
+    "value_reg": 5,
+    "enable": true
   },
   "tss": {
     "addr": 4,
-    "interval": 2000,
+    "interval": 1000,
     "name": "tss",
     "offset_a": 0.0,
     "offset_b": 1.0,
