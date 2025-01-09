@@ -15,7 +15,7 @@ set_optimize("fast")
 add_defines("NDEBUG", "_GNU_SOURCE=1")
 set_warnings("all")
 set_rundir("./")
-set_toolchains("gcc")
+set_toolchains("clang")
 
 target("sensord")
 add_packages(
