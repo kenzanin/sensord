@@ -3,12 +3,11 @@
 #include <cstddef>
 #include <cstdlib>
 #include <ctime>
-#include <fstream>
 #include <functional>
-#include <string>
-#include <unordered_set>
+#include <string> // IWYU pragma: keep
+#include <unordered_set> // IWYU pragma: keep
 
-#include "fmt/core.h"
+#include "fmt/core.h" // IWYU pragma: keep
 
 namespace LICENSE {
 bool check_license() {
