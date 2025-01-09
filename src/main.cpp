@@ -70,11 +70,11 @@ int main(int argc, char **argv) {
 
   std::vector<std::function<void()>> read_group{
       std::bind(&PROBES::Temp::update_value_kacise, &temp),
-      std::bind(&PROBES::Ph::update_value_kacise, &ph),
+      std::bind(&PROBES::Flow::update_value_kacise, &flow),
       std::bind(&PROBES::Cod::update_value_kacise, &cod),
+      std::bind(&PROBES::Ph::update_value_kacise, &ph),
       std::bind(&PROBES::Tss::update_value_kacise, &tss),
       std::bind(&PROBES::Nh3n::update_value_kacise, &nh3n),
-      std::bind(&PROBES::Flow::update_value_kacise, &flow),
       std::bind(&PROBES::Total::update_value_kacise, &total)};
 
   if (!lic->check()) {
