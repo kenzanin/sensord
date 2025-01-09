@@ -50,7 +50,6 @@ void Total::update_value_kacise() {
   if (!enable) {
     logi("{}, addr: {}, reg: {}, disabled", name, addr, value_reg);
     fmtlog::poll();
-    sleep(start, loop);
     return;
   }
   logi("reading {}, addr: {}, reg: {}", name, addr, value_reg);
@@ -58,7 +57,6 @@ void Total::update_value_kacise() {
   auto v = modbus.get_data(addr, 2);
   if (!v.size()) {
     logi("error reading {}, addr: {}, reg: {}", name, addr, value_reg);
-    sleep(start, loop);
     return;
   }
 

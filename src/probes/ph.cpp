@@ -48,7 +48,6 @@ void Ph::update_value_kacise() {
   if (!enable) {
     logi("{}, reg: {}, disabled", name, addr);
     fmtlog::poll();
-    sleep(start, loop);
     return;
   }
   logi("reading {}, addr: {}, reg: {}", name, addr, value_reg);

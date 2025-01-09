@@ -49,7 +49,6 @@ void Cod::update_value_kacise() {
   if (!enable) {
     logi("{}, addr: {}, reg: {}, disabled", name, addr, value_reg);
     fmtlog::poll();
-    sleep(start, loop);
     return;
   }
   logi("reading {}, addr: {}, reg: {}", name, addr, value_reg);
@@ -57,7 +56,6 @@ void Cod::update_value_kacise() {
   auto v = modbus.get_data(value_reg, 6 * 2);
   if (!v.size()) {
     logi("error reading {}, addr: {}, reg: {}", name, addr, value_reg);
-    sleep(start, loop);
     return;
   }
 
@@ -90,7 +88,6 @@ void Cod::update_value_boqu() {
   if (!enable) {
     logi("{}, reg: {}, disabled", name, addr);
     fmtlog::poll();
-    sleep(start, loop);
     return;
   }
   logi("reading {}, reg: {}", name, addr);
@@ -151,7 +148,7 @@ float Cod::get_value_boqu() {
     v = value_min + (random * 0.5);
   }
 
-  v = (v + offset_a) * offset_b;
+  v = (v + offset_b) * offset_a;
 
   if (v < value_min) {
     v = value_min + (random * 0.5);

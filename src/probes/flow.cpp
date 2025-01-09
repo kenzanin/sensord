@@ -12,10 +12,6 @@ Flow::Flow(std::mutex &mutex, MODBUS::Modbus &modbus, json &ph_conf)
   addr = conf.value("addr", 1);
   value_reg = conf.value("value_reg", 0);
   loop = conf.value("interval", 5000);
-  offset_a = conf.value("offset_a", 1.0f);
-  offset_b = conf.value("offset_b", 0.0f);
-  value_min = conf.value("value_min", 4.0f);
-  value_max = conf.value("value_max", 9.0f);
   enable = conf.value("enable", true);
 
   logi("{} probe, addr: {}", name, addr);
@@ -53,14 +49,12 @@ void Flow::update_value_kacise() {
   if (!enable) {
     logi("{}, addr: {}, reg: {}, disabled", name, addr, value_reg);
     fmtlog::poll();
-    sleep(start, loop);
     return;
   }
   logi("reading {}, addr: {}, reg: {}", name, addr, value_reg);
   auto v = modbus.get_value_float_abcd(value_reg);
   if (!v.has_value()) {
     logi("error reading {}, addr: {}, reg: {}", name, addr, value_reg);
-    sleep(start, loop);
     return;
   }
   logi("success reading {}, addr: {}, reg: {}, value: {}", name, addr, value_reg, v.value());

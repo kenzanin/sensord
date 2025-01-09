@@ -73,14 +73,12 @@ void Tss::update_value_boqu() {
   if (!enable) {
     logi("{}, reg: {}, disabled", name, addr);
     fmtlog::poll();
-    sleep(start, loop);
     return;
   }
   logi("reading {}, reg: {}", name, addr);
   auto v = modbus.get_value_float_cdab(value_reg);
   if (!v.has_value()) {
     logi("error reading {}, reg: {}", name, addr);
-    sleep(start, loop);
     return;
   }
   logi("success reading {}: reg: {}, value: {}", name, addr, v.value());
@@ -99,7 +97,7 @@ float Tss::get_value_boqu() {
     v = value_min + (random * random_fact);
   }
 
-  v = (v + offset_a) * offset_b;
+  v = (v + offset_b) * offset_a;
 
   if (v < value_min) {
     v = value_min + (random * random_fact);
@@ -128,7 +126,6 @@ void Tss::update_value_kacise() {
   if (!enable) {
     logi("{}, addr: {}, reg: {}, disabled", name, addr, value_reg);
     fmtlog::poll();
-    sleep(start, loop);
     return;
   }
   logi("reading {}, addr: {}, reg: {}", name, addr, value_reg);
@@ -136,7 +133,6 @@ void Tss::update_value_kacise() {
 
   if (!v.size()) {
     logi("error reading {}, addr: {}, reg: {}", name, addr, value_reg);
-    sleep(start, loop);
     return;
   }
 
@@ -160,7 +156,7 @@ float Tss::get_value_kacise() {
     v = value_min + random;
   }
 
-  v = (v + offset_a) * offset_b;
+  v = (v + offset_b) * offset_a;
 
   if (v < value_min) {
     v = value_min + random;

@@ -72,7 +72,7 @@ float Nh3n::get_value_kacise() {
     v = value_min + random;
   }
 
-  v = (v + offset_a) * offset_b;
+  v = (v + offset_b) * offset_a;
 
   if (v < value_min) {
     v = value_min + random;
@@ -83,10 +83,28 @@ float Nh3n::get_value_kacise() {
   return v;
 }
 
+void Nh3n::set_enable_read(bool en) {
+  {
+    const std::lock_guard<std::mutex> lock(mutex);
+    enable = en;
+  }
+}
+
+bool Nh3n::get_enable_read() { return enable; }
+
+std::vector<float> Nh3n::get_offset() { return {offset_a, offset_b}; };
+
+int Nh3n::set_offset(float a, float b) {
+  {
+    const std::lock_guard<std::mutex> lock(mutex);
+    offset_a = a;
+    offset_b = b;
+    conf.at("offset_a") = offset_a;
+    conf.at("offset_b") = offset_b;
+  }
+  return 0;
+};
+
 void Nh3n::update_value_boqu() {}
-void Nh3n::set_enable_read(bool en) {}
-bool Nh3n::get_enable_read() { return {}; }
 float Nh3n::get_value_boqu() { return {}; }
-std::vector<float> Nh3n::get_offset() { return {}; };
-int Nh3n::set_offset(float a, float b) { return {}; };
 }; // namespace PROBES
