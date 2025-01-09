@@ -60,7 +60,7 @@ void Total::update_value_kacise() {
     return;
   }
 
-  uint32_t v_value = static_cast<uint32_t>(v[1] << 16) | v[0];
+  uint32_t v_value = static_cast<uint32_t>(v[0] << 16) | v[1];
 
   logi("success reading {}, addr: {}, reg: {}, value: {}", name, addr,
        value_reg, v_value);
