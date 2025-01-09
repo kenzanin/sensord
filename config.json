@@ -29,7 +29,9 @@
     "parity": "N",
     "stop_bit": 1,
     "debug": 0,
-    "retry_delay": 500
+    "retry_delay": 500,
+    "byte_timeout": 1000,
+    "response_timeout": 1500
   },
   "nh3n": {
     "addr": 5,
