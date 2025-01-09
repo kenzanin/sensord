@@ -93,6 +93,7 @@ int main(int argc, char **argv) {
           break;
         fmtlog::poll();
       }
+      std::this_thread::sleep_for(std::chrono::milliseconds(200));
     }
   });
 
