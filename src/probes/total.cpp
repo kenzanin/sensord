@@ -54,13 +54,13 @@ void Total::update_value_kacise() {
   }
   logi("reading {}, addr: {}, reg: {}", name, addr, value_reg);
 
-  auto v = modbus.get_data(addr, 2);
+  auto v = modbus.get_data(value_reg, 1 * 2);
   if (!v.size()) {
     logi("error reading {}, addr: {}, reg: {}", name, addr, value_reg);
     return;
   }
 
-  uint32_t v_value = v[1] | (v[0] << 16);
+  uint32_t v_value = static_cast<uint32_t>(v[1] << 16) | v[0];
 
   logi("success reading {}, addr: {}, reg: {}, value: {}", name, addr,
        value_reg, v_value);
