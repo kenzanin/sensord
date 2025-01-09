@@ -62,8 +62,6 @@
     "addr": 2,
     "interval": 1000,
     "name": "temp",
-    "value_max": 50,
-    "value_min": 0,
     "value_reg": 9216,
     "enable": true
   },
@@ -71,7 +69,7 @@
     "addr": 6,
     "interval": 1000,
     "name": "total",
-    "value_reg": 5,
+    "value_reg": 4,
     "enable": true
   },
   "tss": {
