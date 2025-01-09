@@ -6,6 +6,7 @@
 #include <functional>
 #include <string> // IWYU pragma: keep
 #include <unordered_set> // IWYU pragma: keep
+#include <fstream> // IWYU pragma: keep
 
 #include "fmt/core.h" // IWYU pragma: keep
 
