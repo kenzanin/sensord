@@ -3,14 +3,14 @@
 
 namespace SERVER {
 using namespace std::literals;
-void Server::crow_route_temp() {
+void Server::crow_route_total() {
 
-  auto probe = &temp;
-  const auto header_text = "Halaman Temperature"s;
-  const auto page_template = "temp.mst"s;
-  const auto title_text = "Temperature"s;
+  auto probe = &total;
+  const auto header_text = "Halaman Total"s;
+  const auto page_template = "total.mst"s;
+  const auto title_text = "TOTAL"s;
 
-  CROW_ROUTE(app, "/temp")
+  CROW_ROUTE(app, "/total")
   ([&](const crow::request &req) {
     auto url_param = req.url_params;
     auto read_en = url_param.get("read_en");

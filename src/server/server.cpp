@@ -1,15 +1,12 @@
-#include "server.hpp"
 #include "crow.h" // IWYU pragma: keep
 #include "crow/app.h"
 #include "crow/mustache.h"
+
 #include "cstring"
 #include "ctime"
 #include "fstream"
 #include "iterator"
-#include "probes/nh3n.hpp"
-#include "probes/ph.hpp"
-#include "probes/temp.hpp"
-#include "probes/total.hpp"
+#include "server.hpp"
 
 namespace SERVER {
 
@@ -26,11 +23,15 @@ Server::Server(std::mutex &mutex, nlohmann::json &server_conf, PROBES::Ph &ph,
   port = conf.value("port", 8080);
 
   crow_route_menu();
-  crow_route_ph();
   crow_route_index();
   crow_route_read();
+  crow_route_ph();
   crow_route_temp();
+  crow_route_tss();
   crow_route_cod();
+  crow_route_nh3n();
+  crow_route_flow();
+  crow_route_total();
 }
 
 void Server::run() { app.port(port).run(); }

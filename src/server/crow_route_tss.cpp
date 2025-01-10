@@ -3,14 +3,14 @@
 
 namespace SERVER {
 using namespace std::literals;
-void Server::crow_route_cod() {
+void Server::crow_route_tss() {
 
-  auto probe = &cod;
-  const auto header_text = "Halaman COD"s;
-  const auto page_template = "cod.mst"s;
-  const auto title_text = "COD"s;
+  auto probe = &tss;
+  const auto header_text = "Halaman TSS"s;
+  const auto page_template = "tss.mst"s;
+  const auto title_text = "TSS"s;
 
-  CROW_ROUTE(app, "/cod")
+  CROW_ROUTE(app, "/tss")
   ([&](const crow::request &req) {
     auto url_param = req.url_params;
     auto read_en = url_param.get("read_en");
@@ -44,7 +44,7 @@ void Server::crow_route_cod() {
       {"read_en",probe->get_enable_read()},
       {"offset_a",offset_a},
       {"offset_b",offset_b}}
-      );
+    );
     // clang-format on
 
     auto page = join_html_files(page_template);

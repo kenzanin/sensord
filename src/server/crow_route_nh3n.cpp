@@ -3,18 +3,21 @@
 
 namespace SERVER {
 using namespace std::literals;
-void Server::crow_route_temp() {
+void Server::crow_route_nh3n() {
 
-  auto probe = &temp;
-  const auto header_text = "Halaman Temperature"s;
-  const auto page_template = "temp.mst"s;
-  const auto title_text = "Temperature"s;
+  auto probe = &nh3n;
+  const auto header_text = "Halaman NH3N"s;
+  const auto page_template = "nh3n.mst"s;
+  const auto title_text = "NH3N"s;
 
-  CROW_ROUTE(app, "/temp")
+  CROW_ROUTE(app, "/nh3n")
   ([&](const crow::request &req) {
     auto url_param = req.url_params;
     auto read_en = url_param.get("read_en");
     auto read_cmd = url_param.get("read_cmd");
+    auto offset_cmd = url_param.get("offset_cmd");
+    auto offset_a_url = url_param.get("offset_a");
+    auto offset_b_url = url_param.get("offset_b");
 
     if (read_cmd != nullptr && read_cmd == "set"s) {
       if (read_en == ("1"s)) {
@@ -24,11 +27,23 @@ void Server::crow_route_temp() {
       }
     }
 
+    if (offset_cmd != nullptr && offset_cmd == "set"s) {
+      auto a = std::stof(offset_a_url);
+      auto b = std::stof(offset_b_url);
+      probe->set_offset(a, b);
+    }
+
+    auto offset = probe->get_offset();
+    auto offset_a = offset[0];
+    auto offset_b = offset[1];
+
     // clang-format off
     auto ctx = crow::mustache::context({
       {"header_text",header_text},
       {"title",title_text},
-      {"read_en",probe->get_enable_read()}}
+      {"read_en",probe->get_enable_read()},
+      {"offset_a",offset_a},
+      {"offset_b",offset_b}}
       );
     // clang-format on
 

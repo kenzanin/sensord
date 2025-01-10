@@ -4,6 +4,7 @@
 #include "crow/app.h"
 #include "crow/mustache.h"
 #include "nlohmann/json.hpp" // IWYU pragma: keep
+
 #include "probes/cod.hpp"
 #include "probes/flow.hpp"
 #include "probes/nh3n.hpp"
@@ -11,6 +12,7 @@
 #include "probes/temp.hpp"
 #include "probes/total.hpp"
 #include "probes/tss.hpp"
+
 #include <mutex>
 
 namespace SERVER {
@@ -38,7 +40,11 @@ protected:
   PROBES::Flow &flow;
   PROBES::Total &total;
   void crow_route_ph();
+  void crow_route_tss();
   void crow_route_cod();
+  void crow_route_nh3n();
+  void crow_route_flow();
+  void crow_route_total();
   void crow_route_read();
   void crow_route_index();
   void crow_route_menu();
