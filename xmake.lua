@@ -8,6 +8,7 @@ add_requires(
 )
 
 set_policy( "build.across_targets_in_parallel", false)
+set_policy("build.optimization.lto", true)
 add_rules("mode.debug", "mode.release")
 set_languages("c23", "cxx23")
 -- set_optimize("none")
