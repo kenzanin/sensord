@@ -4,14 +4,13 @@
 namespace SERVER {
 using namespace std::literals;
 void Server::crow_route_cod() {
-
-  auto probe = &cod;
-  const auto header_text = "Halaman COD"s;
-  const auto page_template = "cod.mst"s;
-  const auto title_text = "COD"s;
-
   CROW_ROUTE(app, "/cod")
   ([&](const crow::request &req) {
+    auto probe = &cod;
+    const auto header_text = "Halaman COD"s;
+    const auto page_template = "cod.mst"s;
+    const auto title_text = "COD"s;
+
     auto url_param = req.url_params;
     auto read_en = url_param.get("read_en");
     auto read_cmd = url_param.get("read_cmd");

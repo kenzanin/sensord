@@ -4,14 +4,13 @@
 namespace SERVER {
 using namespace std::literals;
 void Server::crow_route_nh3n() {
-
-  auto probe = &nh3n;
-  const auto header_text = "Halaman NH3N"s;
-  const auto page_template = "nh3n.mst"s;
-  const auto title_text = "NH3N"s;
-
   CROW_ROUTE(app, "/nh3n")
   ([&](const crow::request &req) {
+    auto probe = &nh3n;
+    const auto header_text = "Halaman NH3N"s;
+    const auto page_template = "nh3n.mst"s;
+    const auto title_text = "NH3N"s;
+
     auto url_param = req.url_params;
     auto read_en = url_param.get("read_en");
     auto read_cmd = url_param.get("read_cmd");

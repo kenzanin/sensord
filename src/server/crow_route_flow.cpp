@@ -4,14 +4,13 @@
 namespace SERVER {
 using namespace std::literals;
 void Server::crow_route_flow() {
-
-  auto probe = &flow;
-  const auto header_text = "Halaman FLOW"s;
-  const auto page_template = "flow.mst"s;
-  const auto title_text = "FLOW"s;
-
   CROW_ROUTE(app, "/flow")
   ([&](const crow::request &req) {
+    auto probe = &flow;
+    const auto header_text = "Halaman FLOW"s;
+    const auto page_template = "flow.mst"s;
+    const auto title_text = "FLOW"s;
+
     auto url_param = req.url_params;
     auto read_en = url_param.get("read_en");
     auto read_cmd = url_param.get("read_cmd");

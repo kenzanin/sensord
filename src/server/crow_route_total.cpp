@@ -5,13 +5,13 @@ namespace SERVER {
 using namespace std::literals;
 void Server::crow_route_total() {
 
-  auto probe = &total;
-  const auto header_text = "Halaman Total"s;
-  const auto page_template = "total.mst"s;
-  const auto title_text = "TOTAL"s;
-
   CROW_ROUTE(app, "/total")
   ([&](const crow::request &req) {
+    auto probe = &total;
+    const auto header_text = "Halaman Total"s;
+    const auto page_template = "total.mst"s;
+    const auto title_text = "TOTAL"s;
+
     auto url_param = req.url_params;
     auto read_en = url_param.get("read_en");
     auto read_cmd = url_param.get("read_cmd");

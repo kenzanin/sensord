@@ -1,17 +1,17 @@
 #include "crow/app.h"
+#include "fmt/core.h"
 #include "server.hpp" // IWYU pragma: keep
 
 namespace SERVER {
 using namespace std::literals;
 void Server::crow_route_tss() {
-
-  auto probe = &tss;
-  const auto header_text = "Halaman TSS"s;
-  const auto page_template = "tss.mst"s;
-  const auto title_text = "TSS"s;
-
   CROW_ROUTE(app, "/tss")
   ([&](const crow::request &req) {
+    auto probe = &tss;
+    const auto header_text = "Halaman TSS"s;
+    const auto page_template = "tss.mst"s;
+    const auto title_text = "TSS"s;
+
     auto url_param = req.url_params;
     auto read_en = url_param.get("read_en");
     auto read_cmd = url_param.get("read_cmd");
