@@ -15,6 +15,7 @@
 #include "vector"
 
 #include "modbus/modbus.h" // IWYU pragma: keep
+#include <cstdlib>
 
 namespace MODBUS {
 
@@ -34,7 +35,7 @@ Modbus::Modbus(std::mutex &mutex, std::string const device, uint32_t baud,
   modbus_set_error_recovery(ctx, recover);
   logi("modbus trying to connect");
 
-  while (1) {
+  for (int i = 0; true; i++) {
     auto err = modbus_connect(ctx);
     if (err != -1) {
       break;
@@ -42,6 +43,11 @@ Modbus::Modbus(std::mutex &mutex, std::string const device, uint32_t baud,
     logi("cant connect to modbus: {}", modbus_strerror(errno));
     fmtlog::poll();
     std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+    if (i == 10) {
+      logi("exiting");
+      fmtlog::poll();
+      exit(-1);
+    }
   }
   fmtlog::poll();
 }
@@ -66,7 +72,7 @@ Modbus::Modbus(std::mutex &mutex, json &modbus_conf)
   modbus_set_byte_timeout(ctx, 0, byte_timeout);
   modbus_set_error_recovery(ctx, MODBUS_ERROR_RECOVERY_PROTOCOL);
 
-  while (1) {
+  for (int i = 0; true; i++) {
     auto err = modbus_connect(ctx);
     if (err != -1) {
       break;
@@ -74,6 +80,10 @@ Modbus::Modbus(std::mutex &mutex, json &modbus_conf)
     logi("cant connect to modbus: {}", modbus_strerror(errno));
     fmtlog::poll();
     std::this_thread::sleep_for(std::chrono::milliseconds(retry_delay));
+    if (i == 10) {
+      logi("exiting");
+      exit(-1);
+    }
   }
 }
 
