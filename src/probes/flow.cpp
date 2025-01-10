@@ -57,7 +57,8 @@ void Flow::update_value_kacise() {
     logi("error reading {}, addr: {}, reg: {}", name, addr, value_reg);
     return;
   }
-  logi("success reading {}, addr: {}, reg: {}, value: {}", name, addr, value_reg, v.value());
+  logi("success reading {}, addr: {}, reg: {}, value: {}", name, addr,
+       value_reg, v.value());
   {
     const std::lock_guard<std::mutex> lock(mutex);
     value = v.value();

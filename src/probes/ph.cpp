@@ -1,5 +1,5 @@
-#include "fmtlog/fmtlog.h"  // IWYU pragma: keep
 #include "ph.hpp"
+#include "fmtlog/fmtlog.h" // IWYU pragma: keep
 
 #include "cstdlib"
 #include "mutex"
@@ -57,8 +57,9 @@ void Ph::update_value_kacise() {
     sleep(start, loop);
     return;
   }
-  auto val = modbus.dcba_to_float(v,2);
-  logi("success reading {}, addr: {}, reg: {}, value: {}", name, addr, value_reg, val);
+  auto val = modbus.dcba_to_float(v, 2);
+  logi("success reading {}, addr: {}, reg: {}, value: {}", name, addr,
+       value_reg, val);
   {
     const std::lock_guard<std::mutex> lock(mutex);
     value = val;
@@ -169,7 +170,8 @@ int Ph::set_offset(float a, float b) {
 }
 
 void Ph::impl_set_calib_boqu_first_sequence() {
-  if (!calib_first_sequence) return;
+  if (!calib_first_sequence)
+    return;
 
   modbus.set_slave(addr);
   // Standard Solution
@@ -186,7 +188,8 @@ void Ph::impl_set_calib_boqu_first_sequence() {
 }
 
 void Ph::update_calib_slope_boqu() {
-  if (calib == false) return;
+  if (calib == false)
+    return;
   impl_set_calib_boqu_first_sequence();
   auto v = std::optional<int>{0};
   v = modbus.get_value_int16_ab(15);
@@ -214,4 +217,4 @@ void Ph::set_calib_boqu(bool en) {
 bool Ph::get_calib_boqu() { return calib; }
 
 std::vector<float> Ph::get_offset() { return {offset_a, offset_b}; }
-}  // namespace PROBES
+} // namespace PROBES

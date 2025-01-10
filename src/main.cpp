@@ -21,7 +21,6 @@
 #include "memory"
 #include "mutex"
 #include "thread"
-#include "vector"
 
 int main(int argc, char **argv) {
   auto mtx = std::make_unique<std::mutex>();

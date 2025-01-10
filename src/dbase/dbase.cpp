@@ -1,4 +1,4 @@
-#include "dbase.hpp"  // IWYU pragma: keep
+#include "dbase.hpp" // IWYU pragma: keep
 
 #include <algorithm>
 #include <chrono>
@@ -47,10 +47,10 @@ void Dbase::run(float ph, float cod, float tss, float nh3n, float flow) {
     const auto now = std::chrono::duration_cast<std::chrono::seconds>(
                          std::chrono::system_clock::now().time_since_epoch())
                          .count();
-    const auto data_sql = fmt::format(
-        "INSERT INTO sparing (time,ph,cod,tss,nh3n,flow) VALUES "
-        "({},{},{},{},{},{});",
-        now, ph, cod, tss, nh3n, flow);
+    const auto data_sql =
+        fmt::format("INSERT INTO sparing (time,ph,cod,tss,nh3n,flow) VALUES "
+                    "({},{},{},{},{},{});",
+                    now, ph, cod, tss, nh3n, flow);
     logi("{}", data_sql);
     fmtlog::poll();
     try {
@@ -89,8 +89,9 @@ int Dbase::get_interval() { return interval; }
 
 Dbase::~Dbase() {
   // if (db_connection->is_open) db_connection->disconnect();
-  if (db_connection->is_open()) db_connection->close();
+  if (db_connection->is_open())
+    db_connection->close();
   delete db_connection;
 }
 
-}  // namespace DBASE
+} // namespace DBASE

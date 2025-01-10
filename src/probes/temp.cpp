@@ -17,7 +17,7 @@ Temp::Temp(std::mutex &mutex, MODBUS::Modbus &modbus, json &temp_conf)
   addr = conf.value("addr", 1);
   value_reg = conf.value("value_reg", 0);
   loop = conf.value("interval", 5000);
-  enable = conf.value("enable",true);
+  enable = conf.value("enable", true);
 
   logi("{} probe, addr: {}", name, addr);
 
@@ -51,7 +51,8 @@ void Temp::update_value_kacise() {
     logi("error reading {}, addr: {}, reg: {}", name, addr, value_reg);
     return;
   }
-  logi("success reading {}: addr: {}, reg: {}, value: {}", name, addr, value_reg, v.value());
+  logi("success reading {}: addr: {}, reg: {}, value: {}", name, addr,
+       value_reg, v.value());
   {
     const std::lock_guard<std::mutex> lock(mutex);
     value = v.value();

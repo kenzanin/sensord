@@ -3,10 +3,10 @@
 #include <cstddef>
 #include <cstdlib>
 #include <ctime>
-#include <functional>
-#include <string> // IWYU pragma: keep
-#include <unordered_set> // IWYU pragma: keep
 #include <fstream> // IWYU pragma: keep
+#include <functional>
+#include <string>        // IWYU pragma: keep
+#include <unordered_set> // IWYU pragma: keep
 
 #include "fmt/core.h" // IWYU pragma: keep
 
@@ -21,7 +21,7 @@ bool check_license() {
     while (std::getline(cpuinfo, line)) {
       if (line.find("Serial") != std::string::npos) {
         // Split the line to get the serial number
-        serial = line.substr(line.find(":") + 2);  // +2 to skip ": "
+        serial = line.substr(line.find(":") + 2); // +2 to skip ": "
         break;
       }
     }
@@ -59,4 +59,4 @@ license::~license() {
   }
 }
 
-}  // namespace LICENSE
+} // namespace LICENSE
