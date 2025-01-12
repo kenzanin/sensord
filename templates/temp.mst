@@ -7,30 +7,47 @@ vertical-align: middle;
 }
 </style>
 <form>
-  <table>
-    <tr>
-      <td>
-        <table>
-          <tr>
-            <td colspan="2">Temperature Read Operation</td>
-          </tr>
-          <tr>
-            <td>Enable</td>
-            <td>Disable</td>
-          </tr>
-          <tr>
-            <td><input type="radio" id="read_en" name="read_en" value="1" {{#read_en}} checked {{/read_en}}></td>
-            <td><input type="radio" id="read_en" name="read_en" value="0" {{^read_en}} checked {{/read_en}}></td>
-          </tr>
-          <tr>
-            <td><button type="submit" name="read_cmd" value="set">____SET____</button></td>
-            <td><button type="submit" name="read_cmd" value="get">____GET____</button></td>
-          </tr>
-          <tr>
-            <td colspan="2">&nbsp;</td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
+    <table>
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <td colspan="2">{{title}} Read Operation</td>
+                    </tr>
+                    <tr>
+                        <td>Enable</td>
+                        <td>Disable</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio"
+                                   id="read_en"
+                                   name="read_en"
+                                   value="1"
+                                   {{#read_en}}
+                                   checked
+                                   {{/read_en}}>
+                        </td>
+                        <td>
+                            <input type="radio"
+                                   id="read_en"
+                                   name="read_en"
+                                   value="0"
+                                   {{^read_en}}
+                                   checked
+                                   {{/read_en}}>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="submit" name="read_cmd" value="set">____SET____</button>
+                        </td>
+                        <td>
+                            <button type="submit" name="read_cmd" value="get">____GET____</button>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 </form>

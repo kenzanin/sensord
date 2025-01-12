@@ -1,2 +1,2 @@
 <p>Hello World!</p>
-<p>time now: {{now}}</p>
+<p>time now: {{ now }}</p>

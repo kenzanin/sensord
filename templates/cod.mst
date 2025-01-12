@@ -7,73 +7,81 @@ vertical-align: middle;
 }
 </style>
 <form>
-  <table>
-    <tr>
-      <td>
-        <table>
-          <tr>
-            <td colspan="2">COD Read Operation</td>
-          </tr>
-          <tr>
+    <table>
+        <tr>
+            <td colspan="2">{{ title }} Read Operation</td>
+        </tr>
+        <tr>
             <td>Enable</td>
             <td>Disable</td>
-          </tr>
-          <tr>
-            <td><input type="radio" id="read_en" name="read_en" value="1" {{#read_en}} checked {{/read_en}}></td>
-            <td><input type="radio" id="read_en" name="read_en" value="0" {{^read_en}} checked {{/read_en}}></td>
-          </tr>
-          <tr>
-            <td><button type="submit" name="read_cmd" value="set">____SET____</button></td>
-            <td><button type="submit" name="read_cmd" value="get">____GET____</button></td>
-          </tr>
-          <tr>
+        </tr>
+        <tr>
+            <td>
+                <input type="radio"
+                       id="read_en"
+                       name="read_en"
+                       value="1"
+                       {{#read_en}}
+                       checked
+                       {{/read_en}}>
+            </td>
+            <td>
+                <input type="radio"
+                       id="read_en"
+                       name="read_en"
+                       value="0"
+                       {{^read_en}}
+                       checked
+                       {{/read_en}}>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" name="read_cmd" value="set">____SET____</button>
+            </td>
+            <td>
+                <button type="submit" name="read_cmd" value="get">____GET____</button>
+            </td>
+        </tr>
+        <tr>
             <td colspan="2">&nbsp;</td>
-          </tr>
-          <tr>
-            <td colspan="2">COD Calib Operation</td>
-          </tr>
-          <tr>
-            <td>Enable</td>
-            <td>Disable</td>
-          </tr>
-          <tr>
-            <td><input type="radio" id="calib_en" name="calib_en" value="1" {{#calib_en}} checked {{/calib_en}}></td>
-            <td><input type="radio" id="calib_en" name="calib_en" value="0" {{^calib_en}} checked {{/calib_en}}></td>
-          </tr>
-          <tr>
-            <td><button type="submit" name="calib_cmd" value="set">____SET____</button></td>
-            <td><button type="submit" name="calib_cmd" value="get">____GET____</button></td>
-          </tr>
-          <tr>
-            <td colspan="2">&nbsp;</td>
-          </tr>
-          <tr>
+        </tr>
+        <tr>
             <td colspan="2">Modify Offset</td>
-          </tr>
-          <tr>
+        </tr>
+        <tr>
             <td>Offset A</td>
             <td>Offset B</td>
-          </tr>
-          <tr>
-            <td><input type="number" id="offset" name="offset_a" value={{offset_a}} min=-9999 step=any max=9999 size="10"></td>
-            <td><input type="number" id="offset" name="offset_b" value={{offset_b}} min=-9999 step=any max=9999 size="10"></td>
-          </tr>
-          <tr>
-            <td><button type="submit" name="offset_cmd" value="set">____SET____</button></td>
-            <td><button type="submit" name="offset_cmd" value="get">____GET____</button></td>
-          </tr>
-          <tr><td colspan="2">&nbsp;</td></tr>
-          <tr><td colspan="2">Slope Value</td></tr>
-          <tr><td colspan="2">{{slope_val}}</td></tr>
-          <tr><td colspan="2"><button type="submit" name="slope_cmd" value="get">____GET____</button></td></tr>
-        </table>
-      </td>
-      <td>
-        <p>untuk calibration disarankan untuk men-disable read<br>
-        agar respon tidak lama</p>
-        <p>RumusOffset:<br>
-        Output = (sensor output * offset a) + offset b</p>
-      </td>
-    </tr>
-  </table>
+        </tr>
+        <tr>
+            <td>
+                <input type="number"
+                       id="offset"
+                       name="offset_a"
+                       value="{{ offset_a }}"
+                       min="-9999"
+                       step="any"
+                       max="9999"
+                       size="10">
+            </td>
+            <td>
+                <input type="number"
+                       id="offset"
+                       name="offset_b"
+                       value="{{ offset_b }}"
+                       min="-9999"
+                       step="any"
+                       max="9999"
+                       size="10">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" name="offset_cmd" value="set">____SET____</button>
+            </td>
+            <td>
+                <button type="submit" name="offset_cmd" value="get">____GET____</button>
+            </td>
+        </tr>
+    </table>
 </form>
