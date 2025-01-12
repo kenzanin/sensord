@@ -1,10 +1,11 @@
-#include "ph.hpp"
 #include "fmtlog/fmtlog.h" // IWYU pragma: keep
 
 #include "cstdlib"
 #include "mutex"
 #include "optional"
 #include "vector"
+
+#include "ph.hpp"
 
 namespace PROBES {
 
@@ -126,7 +127,7 @@ float Ph::get_value_kacise() {
     v = value_min + (random * random_fact);
   }
 
-  v = (v + offset_a) * offset_b;
+  v = (v + offset_b) * offset_a;
 
   if (v < value_min) {
     v = value_min + (random * random_fact);
@@ -147,7 +148,7 @@ float Ph::get_value_boqu() {
     v = value_min + random;
   }
 
-  v = (v + offset_a) * offset_b;
+  v = (v + offset_b) * offset_a;
 
   if (v < value_min) {
     v = value_min + random;
